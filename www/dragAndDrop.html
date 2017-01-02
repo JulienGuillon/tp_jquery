@@ -1,0 +1,384 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 	
+        <title>Drag and Drop's part of Mcg's Project </title>
+   
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="jquery.ui.touch-punch.min.js"></script>
+        <link rel="stylesheet" href="css/header.css"></link>
+        <style>
+
+            h6 {
+                line-height: 16px;
+                text-align: center;
+                margin: 2em 0 -3.7em;
+				margin-left:19%;
+				width:62%;
+                font-size: 0.8em;
+            }
+
+            h4 {
+                margin: 0 0 4em;
+				text-align: center;
+                color: black;
+            }
+
+            h3 {
+                line-height: 16px;
+                text-align: center;
+                margin: 0 0 0.1em;
+				margin-left:19%;
+				width:62%;
+                font-size: 0.8em;
+            }
+
+            #gallery {
+                float: top;
+                width: 100%;
+                min-height: 12em;
+            }
+
+            .gallery.custom-state-active { background: #eee; }
+
+            .gallery li {
+                float: left;
+                width: 96px;
+                padding: 0.4em;
+                margin: 0 0.4em 0.4em 0;
+                text-align: center;
+            }
+
+            .gallery li h5 {
+                margin: 0 0 0.4em;
+                cursor: move;
+            }
+
+            .gallery li a {
+                float: right;
+            }
+
+            .gallery li a.ui-icon-zoomin {
+                float: left;
+            }
+
+            .gallery li img {
+                width: 84%;
+                cursor: move;
+            }
+
+            #sortable {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                width: 450px;
+            }
+
+            #sortable li {
+                margin: 3px 3px 3px 0;
+                padding: 1px;
+                float:left;
+                width: 100px;
+                height: 90px;
+                font-size: 1.5em;
+                text-align: center;
+            }
+
+            #trash {
+                margin-left: 19%;
+                margin-top: 3em;
+                float: bottom;
+                width: 60%;
+                min-height: 13.3em;
+                padding: 1%;
+			}
+
+            #trash h4 {
+                line-height: 16px;
+                text-align: center;
+                margin: 0 0 0.4em;
+            }
+
+            #trash h4 .ui-icon {
+                float: left;
+                color: white; 
+            }
+
+            #trash .gallery h5 {
+                display: none;
+            }
+            
+        </style>
+  
+
+        <script>
+            $(function () {
+
+				/* Des variables utiles */
+                var $gallery = $("#gallery");
+                var $trash = $("#trash");
+                
+                /**
+                 *  
+                 * Pour rendre la "gallerie" draggable : insérez ici :)
+                 * 
+                 * **/
+         		$("#gallery li").draggable({
+				
+
+                });
+
+
+
+
+                /**
+                 *  
+                 * Pour rendre la "gallerie" sortable : insérez ici :)
+                 * 
+                 * **/
+ 				$gallery.sortable({
+
+
+				});
+      
+                
+                $( "ul, li" ).disableSelection();
+
+
+
+
+                /**
+                 *  
+                 * Pour que la "poubelle" soit droppable : insérez ici :)
+                 * 
+                 * **/
+                $trash.droppable({
+				
+				
+                });
+
+
+
+
+                /**
+                 *  
+                 * Pour que la "gallerie" soit droppable : insérez ici :)
+                 * 
+                 * **/
+                $gallery.droppable({
+				
+				
+                });
+
+
+				/*  
+				
+				Thèmes à tester pour trouver celui correspondant à l'exemple. Aucun autre thème n'a été utilisé lors de la présentation finale.
+
+					- ui-state-highlight
+					- ui-state-focus
+					- ui-state-error
+
+				*/
+
+
+
+
+				/* Fonction appelée lors du drop dans la poubelle ( #trash ) et du click sur l'ui-icon-trash */
+                var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Recycle this image' class='ui-icon ui-icon-refresh'>Recycle image</a>";
+                function deleteImage($item) {
+                    $item.fadeOut(function () {
+                        var $list = $("ul", $trash).length ? $("ul", $trash) :
+                                $("<ul id='trash2' class='gallery ui-helper-reset'/>").appendTo("#trash");
+
+                        $item.find("a.ui-icon-trash").remove();
+                        $item.append(recycle_icon).appendTo($list).fadeIn(function () {
+                            $item
+                                .animate({width: "48px"})
+                                .find("img")
+                                .animate({height: "36px"});
+                        });
+                    });
+                }
+
+
+
+				/* Fonction appelée lors du drop dans la gallerie ( #gallery ) et du click sur l'ui-icon-refresh */
+                var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Delete this image' class='ui-icon ui-icon-trash'>Delete image</a>";
+                function recycleImage($item) {
+                    $item.fadeOut(function () {
+                        $item
+                            .find("a.ui-icon-refresh")
+                            .remove()
+                            .end()
+                            .css("width", "96px")
+                            .append(trash_icon)
+                            .find("img")
+                            .css("height", "72px")
+                            .end()
+                            .appendTo($gallery)
+                            .fadeIn();
+                    });
+                }
+
+
+
+				/* Fonction appelée lors du click sur l'ui-icon-zoomin */
+                function viewLargerImage($link) {
+                    var src    = $link.attr("href");
+                    var title  = $link.siblings("img").attr("alt");
+                    var $modal = $("img[src$='" + src + "']");
+
+                    if ($modal.length) {
+                        $modal.dialog("open");
+                    }
+                    else {
+                        var img = $("<img alt='" + title + "' width='384' height='288' style='display: none; padding: 2;' />")
+							.attr("src",src).appendTo("body");
+                        
+						setTimeout(function () {
+                            img.dialog({
+                                title: title,
+                                width: 210,
+                                closeText: "",
+								closeOnEscape: true,
+								resizable: false,
+								draggable: false,
+                                modal: true 
+                            });
+                        }, 1);
+                    }
+                }
+
+
+
+				/* Fonction appelée lors d'un click, qui appelle elle même la fonction correspondante selon l'ui-icon */
+                $("ul.gallery > li").on("click", function (event) {
+                    var $item   = $(this);
+                    var $target = $(event.target);
+
+                    if ($target.is("a.ui-icon-trash")) {
+                        deleteImage($item);
+                    }
+                    
+                    else if ($target.is("a.ui-icon-zoomin")) {
+                        viewLargerImage($target);
+                    }
+                    
+                    else if ($target.is("a.ui-icon-refresh")) {
+                        recycleImage($item);
+                    }
+                    
+                    return false;
+                });
+            });
+        </script>
+    </head>
+    <body>
+    
+        <div data-role="header">
+        	<div data-role="navbar">
+                <ul>
+                    <li><a href="index.html">Canvas</a></li>
+                    <li><a href="svg.html">SVG</a></li>
+                    <li><a href="canvas-svg.html">Canvas / SVG</a></li>
+                    <li><a href="dragAndDrop.html">Drag&Drop</a></li>
+                    <li><a href="webgl.html">WebGl</a></li>
+                    <li><a href="tictactoecanvas.html">TicTacTaoCanvas</a></li>
+                    <li><a href="tictactoesvg.html">TicTacTaoSvg</a></li>
+                </ul>
+            </div>	
+        </div>
+        <div class="ui-widget ui-helper-clearfix">
+            <h4 class="ui-widget-header">Exemple Drag and drop jQuery UI mobile</h4>
+            <h3 class="ui-state-active">You can drag all of this..</h3>
+
+            <div id="containment-wrapper">
+
+                <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">Marseille</h5>
+                        <img src="img/om.png" alt="Sixth of Ligue 1" width="96" height="72">
+                        <a href="img/om.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">Paris</h5>
+                        <img src="img/psg.png" alt="Third of Ligue 1" width="96" height="72">
+                        <a href="img/psg.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">Monaco</h5>
+                        <img src="img/asm.png" alt="Second of Ligue 1" width="96" height="72">
+                        <a href="img/asm.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">Nice</h5>
+                        <img src="img/nice.png" alt="Leader of Ligue 1" width="96" height="72">
+                        <a href="img/nice.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">St-Etienne</h5>
+                        <img src="img/asse.png" alt="Ninth f Ligue 1" width="96" height="72">
+                        <a href="img/asse.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">Lyon</h5>
+                        <img src="img/ol.png" alt="Fourth of Ligue 1" width="96" height="72">
+                        <a href="img/ol.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">Guinguamp</h5>
+                        <img src="img/g.png" alt="Fifth of Ligue 1" width="96" height="72">
+                        <a href="img/g.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">Lille</h5>
+                        <img src="img/lille.png" alt="Thirteenth of Ligue 1" width="96" height="72">
+                        <a href="img/lille.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">Caen</h5>
+                        <img src="img/caen.png" alt="Sixteenth of Ligue 1" width="96" height="72">
+                        <a href="img/caen.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">Toulouse</h5>
+                        <img src="img/toulouse.png" alt="Height of Ligue 1" width="96" height="72">
+                        <a href="img/toulouse.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+                    <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-state-default">Nantes</h5>
+                        <img src="img/nantes.png" alt="Before last of Ligue 1" width="96" height="72">
+                        <a href="img/nantes.png " title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+                        <a title="Delete this image" class="ui-icon ui-icon-trash">Delete club</a>
+                    </li>
+
+                </ul>
+
+                <h6 class="ui-state-active">..and drop them here</h6>
+                <ul id="trash" class="ui-widget-content ui-state-default">
+                
+				</ul>
+		        
+            </div>
+            
+        </div>
+    </body>
+</html>

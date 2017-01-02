@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
+        <title>jQuery SVG Basics</title>
+        <link rel="stylesheet" href="css/jquery.svg.css"></link>
+        <link rel="stylesheet" href="css/header.css"></link>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+        <script src="js/jquery.svg.js"></script>
+        <script type="text/javascript" src="js/jquery.svgdom.js"></script>
+        <script src="js/jquery.ui.touch-punch.min.js"></script>
+        <script src="js/svg.js"></script>
+    </head>
+    <body>
+        <div data-role="page" id="page1">
+			<div data-role="header">
+				<div data-role="navbar">
+                    <ul>
+                        <li><a href="index.html">Canvas</a></li>
+                        <li><a href="svg.html">SVG</a></li>
+                        <li><a href="canvas-svg.html">Canvas / SVG</a></li>
+                        <li><a href="dragAndDrop.html">Drag&Drop</a></li>
+                        <li><a href="webgl.html">WebGl</a></li>
+                        <li><a href="tictactoecanvas.html">TicTacTaoCanvas</a></li>
+                        <li><a href="tictactoesvg.html">TicTacTaoSvg</a></li>
+                    </ul>
+                </div>	
+			</div>
+			
+			<div class="ui-content" ">
+                <h1>jQuery SVG Basics</h1>
+                <svg id="svgbasics" width="350px" height="350px">
+                </svg>
+			</div>
+			
+		<div data-role="footer">
+        	<div data-role="navbar">
+                 <form action="">
+                    <input name="draw" type="radio" value="None" checked="checked">None
+                    <input name="draw" type="radio" value="Circle">Cercle
+                    <input name="draw" type="radio" value="Rectangle">Rectangle
+                    <input name="draw" type="radio" value="Image">Image
+            </div>	
+        </div>
+    </body>
+</html>
+
