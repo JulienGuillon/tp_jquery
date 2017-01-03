@@ -11,8 +11,8 @@
         <link rel="stylesheet" href="css/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="jquery.ui.touch-punch.min.js"></script>
-        <link rel="stylesheet" href="css/header.css"></link>
+        <script src="js/jquery.ui.touch-punch.min.js"></script>
+                <link rel="stylesheet" href="css/header.css">
         <style>
 
             h6 {
@@ -115,21 +115,49 @@
             }
             
         </style>
-  
+ 
 
         <script>
+
+
+                /**
+                 *  
+				 * _______ IL FAUT COMPLÉTER LES TRAITILLÉS ( ---- ) AUTOUR DES " . " ________
+				 *
+				 *
+				 * **/
+
+
+				/*  
+				
+				Classes à tester pour trouver celui correspondant à l'exemple. Aucun autre thème n'a été utilisé lors de la présentation finale.
+
+					- ui-state-highlight
+					- ui-state-focus
+					- ui-state-error
+
+				*/
+
+
+
             $(function () {
 
 				/* Des variables utiles */
                 var $gallery = $("#gallery");
                 var $trash = $("#trash");
                 
-                /**
-                 *  
+
+				
+				
+				/**
+				 *
                  * Pour rendre la "gallerie" draggable : insérez ici :)
-                 * 
+				 *
+                 * /!\ ATTENTION: ne pas dragger la gallerie entière mais ses composants
+				 *
                  * **/
-         		$("#gallery li").draggable({
+
+         		-----.-----({
 				
 
                 });
@@ -142,23 +170,22 @@
                  * Pour rendre la "gallerie" sortable : insérez ici :)
                  * 
                  * **/
- 				$gallery.sortable({
+
+ 				-----.-----({
 
 
 				});
       
-                
-                $( "ul, li" ).disableSelection();
-
-
+              
 
 
                 /**
                  *  
-                 * Pour que la "poubelle" soit droppable : insérez ici :)
+                 * Pour que l'on puisse dropper dans la "poubelle" : insérez ici :)
                  * 
                  * **/
-                $trash.droppable({
+
+                -----.-----({
 				
 				
                 });
@@ -168,24 +195,14 @@
 
                 /**
                  *  
-                 * Pour que la "gallerie" soit droppable : insérez ici :)
+                 * Pour que l'on puisse dropper dans la "galerie" : insérez ici :)
                  * 
                  * **/
-                $gallery.droppable({
+
+                -----.-----({
 				
 				
                 });
-
-
-				/*  
-				
-				Thèmes à tester pour trouver celui correspondant à l'exemple. Aucun autre thème n'a été utilisé lors de la présentation finale.
-
-					- ui-state-highlight
-					- ui-state-focus
-					- ui-state-error
-
-				*/
 
 
 
@@ -281,20 +298,19 @@
         </script>
     </head>
     <body>
-    
         <div data-role="header">
-        	<div data-role="navbar">
-                <ul>
-                    <li><a href="index.html">Canvas</a></li>
-                    <li><a href="svg.html">SVG</a></li>
-                    <li><a href="canvas-svg.html">Canvas / SVG</a></li>
-                    <li><a href="dragAndDrop.html">Drag&Drop</a></li>
-                    <li><a href="webgl.html">WebGl</a></li>
-                    <li><a href="tictactoecanvas.html">TicTacTaoCanvas</a></li>
-                    <li><a href="tictactoesvg.html">TicTacTaoSvg</a></li>
-                </ul>
-            </div>	
+    	<div data-role="navbar">
+            <ul>
+                <li><a href="index.html">Canvas</a></li>
+                <li><a href="svg.html">SVG</a></li>
+                <li><a href="canvas-svg.html">Canvas / SVG</a></li>
+                <li><a href="dragAndDrop.html">Drag&Drop</a></li>
+                <li><a href="webgl.html">WebGl</a></li>
+                <li><a href="tictactoecanvas.html">TicTacTaoCanvas</a></li>
+                <li><a href="tictactoesvg.html">TicTacTaoSvg</a></li>
+            </ul>
         </div>
+            </div>
         <div class="ui-widget ui-helper-clearfix">
             <h4 class="ui-widget-header">Exemple Drag and drop jQuery UI mobile</h4>
             <h3 class="ui-state-active">You can drag all of this..</h3>
